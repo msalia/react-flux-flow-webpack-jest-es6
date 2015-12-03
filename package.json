@@ -1,0 +1,35 @@
+{
+  "name": "React-Flux-Flow-Webpack-ES6",
+  "version": "0.0.1",
+  "description": "React Bootstrap",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo No Tests;"
+  },
+  "keywords": [
+    "react",
+    "flux",
+    "flow",
+    "webpack",
+    "es6"
+  ],
+  "author": "Mukund Salia",
+  "dependencies": {
+    "babel-core": "^6.2.1",
+    "babel-loader": "^6.2.0",
+    "classnames": "^2.2.1",
+    "flux": "^2.1.1",
+    "invariant": "^2.2.0",
+    "jsx-loader": "^0.13.2",
+    "keymirror": "^0.1.1",
+    "object-assign": "^4.0.1",
+    "path": "^0.12.7",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "webpack": "^1.12.9"
+  },
+  "devDependencies": {
+    "flowcheck": "^0.2.7",
+    "flowcheck-loader": "^1.0.0"
+  }
+}
