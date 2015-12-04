@@ -18,8 +18,9 @@ class BaseStore extends EventEmitter {
     }
 
     onDispatch(payload: Object): bool {
-        var callback = this.actions[payload.type];
-        callback && callback(payload);
+        var action = payload.action;
+        var callback = this.actions[action.actionType];
+        callback && callback(action);
         return true;
     }
 

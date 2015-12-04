@@ -12,15 +12,21 @@ class ExampleStore extends BaseStore {
 
     constructor() {
         super();
-        this.setupActions();
+        this._data = {};
+        this._setupActions();
     }
 
-    setupActions() {
+    _setupActions(): void {
         this.addAction(ActionTypes.INIT_LOAD, this.initLoad);
     }
 
-    initLoad(action: Object) {
+    initLoad(action: Object): void {
+        this._data = action.data || {};
         this.emitChange();
+    }
+
+    getData(): Object {
+        return this._data;
     }
 
 }
