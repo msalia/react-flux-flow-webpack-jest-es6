@@ -1,5 +1,5 @@
 /*
- * Applicaiton Initializer
+ * Application Initializer
  * @flow
  */
 
