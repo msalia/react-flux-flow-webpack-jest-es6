@@ -9,45 +9,47 @@ webpackJsonp([0],{
 	 */
 	
 	var App = __webpack_require__(1);
-	var AppActions = __webpack_require__(176);
-	var AppConstants = __webpack_require__(160);
-	var AppDispatcher = __webpack_require__(162);
-	var ExampleStore = __webpack_require__(177);
+	var AppActions = __webpack_require__(160);
+	var AppConstants = __webpack_require__(161);
+	var AppDispatcher = __webpack_require__(163);
+	var ExampleStore = __webpack_require__(167);
 	var React = __webpack_require__(2);
-	var ReactDOM = __webpack_require__(169);
+	var ReactDOM = __webpack_require__(175);
 	
 	var $__0=  AppConstants,ActionTypes=$__0.ActionTypes;
 	
-	/* Inital entry point and bootstrapper for application */
-	function Initializer(){"use strict";}
 	
-	    Object.defineProperty(Initializer.prototype,"initialize",{writable:true,configurable:true,value:function()       {"use strict"; var ret = (function () {
+	
+	    function Initializer() {"use strict";
+	        this.application = React.createElement(App, null);
+	        this.stores = [
+	            ExampleStore,
+	        ];
+	    }
+	
+	    Object.defineProperty(Initializer.prototype,"init",{writable:true,configurable:true,value:function(appRoot)       {"use strict";__webpack_require__(166).check(arguments, __webpack_require__(166).arguments([__webpack_require__(166).any])); var ret = (function (appRoot) {
 	        // Perform store initialization
-	        AppDispatcher.register(function(action)  {
+	        var dispatchToken = AppDispatcher.register(function(action)  {
 	            if (action.type === ActionTypes.INIT_LOAD) {
-	                var stores = [
-	                    ExampleStore,
-	                ];
 	                AppDispatcher.waitFor(
-	                    stores.map(function(store)  {return store.getDispatchToken();})
+	                    this.stores.map(function(store)  {return store.getDispatchToken();})
 	                );
 	
 	                // Render the application
-	                ReactDOM.render(
-	                    React.createElement(App, null),
-	                    document.getElementById("app-root")
-	                );
+	                ReactDOM.render(this.application, appRoot);
+	                AppDispatcher.unregister(dispatchToken);
 	            }
-	        });
+	            return;
+	        }.bind(this));
 	
 	        // send the initializing action
 	        AppActions.initLoad();
-	    }).apply(this, arguments); return __webpack_require__(168).check(ret, __webpack_require__(168).void);}});
+	    }).apply(this, arguments); return __webpack_require__(166).check(ret, __webpack_require__(166).void);}});
 	
 	
 	
 	var initializer = new Initializer();
-	initializer.initialize();
+	initializer.init(document.getElementById("app-root"));
 	
 	module.exports = Initializer;
 
@@ -152,11 +154,41 @@ webpackJsonp([0],{
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
+	 * Application Actions
+	 * @flow
+	 */
+	
+	var AppConstants = __webpack_require__(161);
+	var AppDispatcher = __webpack_require__(163);
+	
+	var $__0=  AppConstants,ActionTypes=$__0.ActionTypes;
+	
+	function AppActions(){"use strict";}
+	
+	    Object.defineProperty(AppActions.prototype,"dispatch",{writable:true,configurable:true,value:function(type        , data         ) {"use strict";__webpack_require__(166).check(arguments, __webpack_require__(166).arguments([__webpack_require__(166).string, __webpack_require__(166).optional(__webpack_require__(166).object)]));
+	        AppDispatcher.dispatch(Object.assign({ type:type}, data ));
+	    }});
+	
+	    Object.defineProperty(AppActions.prototype,"initLoad",{writable:true,configurable:true,value:function(data         ) {"use strict";__webpack_require__(166).check(arguments, __webpack_require__(166).arguments([__webpack_require__(166).optional(__webpack_require__(166).object)]));
+	        this.dispatch(ActionTypes.INIT_LOAD, data);
+	    }});
+	
+	;
+	
+	module.exports = new AppActions();
+
+
+/***/ },
+
+/***/ 161:
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
 	 * Application Constants
 	 * @flow
 	 */
 	
-	var keyMirror = __webpack_require__(161);
+	var keyMirror = __webpack_require__(162);
 	
 	var AppConstants = {
 	
@@ -171,7 +203,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 161:
+/***/ 162:
 /***/ function(module, exports) {
 
 	/**
@@ -231,7 +263,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 162:
+/***/ 163:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -239,7 +271,7 @@ webpackJsonp([0],{
 	 * @flow
 	 */
 	
-	var Dispatcher = __webpack_require__(163).Dispatcher;
+	var Dispatcher = __webpack_require__(164).Dispatcher;
 	var AppDispatcher = new Dispatcher();
 	
 	AppDispatcher.handleViewAction = function(action)  {
@@ -255,125 +287,6 @@ webpackJsonp([0],{
 /***/ },
 
 /***/ 166:
-/***/ function(module, exports, __webpack_require__) {
-
-	/*
-	 * BaseStore
-	 * @flow
-	 */
-	
-	var AppDispatcher = __webpack_require__(162);
-	var EventEmitter = __webpack_require__(171).EventEmitter;
-	var React = __webpack_require__(2);
-	
-	var invariant = __webpack_require__(167);
-	
-	for(var EventEmitter____Key in EventEmitter){if(EventEmitter.hasOwnProperty(EventEmitter____Key)){BaseStore[EventEmitter____Key]=EventEmitter[EventEmitter____Key];}}var ____SuperProtoOfEventEmitter=EventEmitter===null?null:EventEmitter.prototype;BaseStore.prototype=Object.create(____SuperProtoOfEventEmitter);BaseStore.prototype.constructor=BaseStore;BaseStore.__superConstructor__=EventEmitter;
-	
-	    function BaseStore() {"use strict";
-	        EventEmitter.call(this);
-	        this.actions = {};
-	        this.dispatchToken = AppDispatcher.register(this.onDispatch.bind(this));
-	    }
-	
-	    Object.defineProperty(BaseStore.prototype,"onDispatch",{writable:true,configurable:true,value:function(payload        )       {"use strict";__webpack_require__(168).check(arguments, __webpack_require__(168).arguments([__webpack_require__(168).object])); var ret = (function (payload) {
-	        var callback = this.actions[payload.type];
-	        callback && callback(payload);
-	        return true;
-	    }).apply(this, arguments); return __webpack_require__(168).check(ret, __webpack_require__(168).boolean);}});
-	
-	    Object.defineProperty(BaseStore.prototype,"addAction",{writable:true,configurable:true,value:function(action        , callback          )       {"use strict";__webpack_require__(168).check(arguments, __webpack_require__(168).arguments([__webpack_require__(168).string, __webpack_require__(168).function])); var ret = (function (action, callback) {
-	        invariant(!this.actions[action], ("" + action + " already exists."));
-	        this.actions[action] = callback.bind(this);
-	    }).apply(this, arguments); return __webpack_require__(168).check(ret, __webpack_require__(168).void);}});
-	
-	    Object.defineProperty(BaseStore.prototype,"getDispatchToken",{writable:true,configurable:true,value:function()         {"use strict"; var ret = (function () {
-	        return this.dispatchToken;
-	    }).apply(this, arguments); return __webpack_require__(168).check(ret, __webpack_require__(168).string);}});
-	
-	    Object.defineProperty(BaseStore.prototype,"getDispatcher",{writable:true,configurable:true,value:function()         {"use strict"; var ret = (function () {
-	        return AppDispatcher;
-	    }).apply(this, arguments); return __webpack_require__(168).check(ret, __webpack_require__(168).object);}});
-	
-	    Object.defineProperty(BaseStore.prototype,"emitChange",{writable:true,configurable:true,value:function()       {"use strict"; var ret = (function () {
-	        ____SuperProtoOfEventEmitter.emit.call(this,'change');
-	    }).apply(this, arguments); return __webpack_require__(168).check(ret, __webpack_require__(168).void);}});
-	
-	    Object.defineProperty(BaseStore.prototype,"addChangeListener",{writable:true,configurable:true,value:function(callback          )       {"use strict";__webpack_require__(168).check(arguments, __webpack_require__(168).arguments([__webpack_require__(168).function])); var ret = (function (callback) {
-	        ____SuperProtoOfEventEmitter.addListener.call(this,'change', callback);
-	    }).apply(this, arguments); return __webpack_require__(168).check(ret, __webpack_require__(168).void);}});
-	
-	    Object.defineProperty(BaseStore.prototype,"removeChangeListener",{writable:true,configurable:true,value:function(callback          )       {"use strict";__webpack_require__(168).check(arguments, __webpack_require__(168).arguments([__webpack_require__(168).function])); var ret = (function (callback) {
-	        ____SuperProtoOfEventEmitter.removeListener.call(this,'change', callback);
-	    }).apply(this, arguments); return __webpack_require__(168).check(ret, __webpack_require__(168).void);}});
-	
-	
-	
-	module.exports = BaseStore;
-
-
-/***/ },
-
-/***/ 167:
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 */
-	
-	'use strict';
-	
-	/**
-	 * Use invariant() to assert state which your program assumes to be true.
-	 *
-	 * Provide sprintf-style format (only %s is supported) and arguments
-	 * to provide information about what broke and what you were
-	 * expecting.
-	 *
-	 * The invariant message will be stripped in production, but the invariant
-	 * will remain to ensure logic does not differ in production.
-	 */
-	
-	var invariant = function(condition, format, a, b, c, d, e, f) {
-	  if (process.env.NODE_ENV !== 'production') {
-	    if (format === undefined) {
-	      throw new Error('invariant requires an error message argument');
-	    }
-	  }
-	
-	  if (!condition) {
-	    var error;
-	    if (format === undefined) {
-	      error = new Error(
-	        'Minified exception occurred; use the non-minified dev environment ' +
-	        'for the full error message and additional helpful warnings.'
-	      );
-	    } else {
-	      var args = [a, b, c, d, e, f];
-	      var argIndex = 0;
-	      error = new Error(
-	        format.replace(/%s/g, function() { return args[argIndex++]; })
-	      );
-	      error.name = 'Invariant Violation';
-	    }
-	
-	    error.framesToPop = 1; // we don't care about invariant's own frame
-	    throw error;
-	  }
-	};
-	
-	module.exports = invariant;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
-
-/***/ },
-
-/***/ 168:
 /***/ function(module, exports) {
 
 	//     flowcheck 0.2.7
@@ -686,17 +599,102 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 169:
+/***/ 167:
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/*
+	 * Data Store
+	 * @flow
+	 */
 	
-	module.exports = __webpack_require__(4);
+	var AppConstants = __webpack_require__(161);
+	var BaseStore = __webpack_require__(168);
+	
+	var $__0=  AppConstants,ActionTypes=$__0.ActionTypes;
+	
+	for(var BaseStore____Key in BaseStore){if(BaseStore.hasOwnProperty(BaseStore____Key)){ExampleStore[BaseStore____Key]=BaseStore[BaseStore____Key];}}var ____SuperProtoOfBaseStore=BaseStore===null?null:BaseStore.prototype;ExampleStore.prototype=Object.create(____SuperProtoOfBaseStore);ExampleStore.prototype.constructor=ExampleStore;ExampleStore.__superConstructor__=BaseStore;
+	
+	    function ExampleStore() {"use strict";
+	        BaseStore.call(this);
+	        this.setupActions();
+	    }
+	
+	    Object.defineProperty(ExampleStore.prototype,"setupActions",{writable:true,configurable:true,value:function() {"use strict";
+	        this.addAction(ActionTypes.INIT_LOAD, this.initLoad);
+	    }});
+	
+	    Object.defineProperty(ExampleStore.prototype,"initLoad",{writable:true,configurable:true,value:function(action        ) {"use strict";__webpack_require__(166).check(arguments, __webpack_require__(166).arguments([__webpack_require__(166).object]));
+	        this.emitChange();
+	    }});
+	
+	
+	
+	module.exports = new ExampleStore();
 
 
 /***/ },
 
-/***/ 171:
+/***/ 168:
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+	 * BaseStore
+	 * @flow
+	 */
+	
+	var AppDispatcher = __webpack_require__(163);
+	var EventEmitter = __webpack_require__(169).EventEmitter;
+	var React = __webpack_require__(2);
+	
+	var invariant = __webpack_require__(174);
+	
+	for(var EventEmitter____Key in EventEmitter){if(EventEmitter.hasOwnProperty(EventEmitter____Key)){BaseStore[EventEmitter____Key]=EventEmitter[EventEmitter____Key];}}var ____SuperProtoOfEventEmitter=EventEmitter===null?null:EventEmitter.prototype;BaseStore.prototype=Object.create(____SuperProtoOfEventEmitter);BaseStore.prototype.constructor=BaseStore;BaseStore.__superConstructor__=EventEmitter;
+	
+	    function BaseStore() {"use strict";
+	        EventEmitter.call(this);
+	        this.actions = {};
+	        this.dispatchToken = AppDispatcher.register(this.onDispatch.bind(this));
+	    }
+	
+	    Object.defineProperty(BaseStore.prototype,"onDispatch",{writable:true,configurable:true,value:function(payload        )       {"use strict";__webpack_require__(166).check(arguments, __webpack_require__(166).arguments([__webpack_require__(166).object])); var ret = (function (payload) {
+	        var callback = this.actions[payload.type];
+	        callback && callback(payload);
+	        return true;
+	    }).apply(this, arguments); return __webpack_require__(166).check(ret, __webpack_require__(166).boolean);}});
+	
+	    Object.defineProperty(BaseStore.prototype,"addAction",{writable:true,configurable:true,value:function(action        , callback          )       {"use strict";__webpack_require__(166).check(arguments, __webpack_require__(166).arguments([__webpack_require__(166).string, __webpack_require__(166).function])); var ret = (function (action, callback) {
+	        invariant(!this.actions[action], ("" + action + " already exists."));
+	        this.actions[action] = callback.bind(this);
+	    }).apply(this, arguments); return __webpack_require__(166).check(ret, __webpack_require__(166).void);}});
+	
+	    Object.defineProperty(BaseStore.prototype,"getDispatchToken",{writable:true,configurable:true,value:function()         {"use strict"; var ret = (function () {
+	        return this.dispatchToken;
+	    }).apply(this, arguments); return __webpack_require__(166).check(ret, __webpack_require__(166).string);}});
+	
+	    Object.defineProperty(BaseStore.prototype,"getDispatcher",{writable:true,configurable:true,value:function()         {"use strict"; var ret = (function () {
+	        return AppDispatcher;
+	    }).apply(this, arguments); return __webpack_require__(166).check(ret, __webpack_require__(166).object);}});
+	
+	    Object.defineProperty(BaseStore.prototype,"emitChange",{writable:true,configurable:true,value:function()       {"use strict"; var ret = (function () {
+	        ____SuperProtoOfEventEmitter.emit.call(this,'change');
+	    }).apply(this, arguments); return __webpack_require__(166).check(ret, __webpack_require__(166).void);}});
+	
+	    Object.defineProperty(BaseStore.prototype,"addChangeListener",{writable:true,configurable:true,value:function(callback          )       {"use strict";__webpack_require__(166).check(arguments, __webpack_require__(166).arguments([__webpack_require__(166).function])); var ret = (function (callback) {
+	        ____SuperProtoOfEventEmitter.addListener.call(this,'change', callback);
+	    }).apply(this, arguments); return __webpack_require__(166).check(ret, __webpack_require__(166).void);}});
+	
+	    Object.defineProperty(BaseStore.prototype,"removeChangeListener",{writable:true,configurable:true,value:function(callback          )       {"use strict";__webpack_require__(166).check(arguments, __webpack_require__(166).arguments([__webpack_require__(166).function])); var ret = (function (callback) {
+	        ____SuperProtoOfEventEmitter.removeListener.call(this,'change', callback);
+	    }).apply(this, arguments); return __webpack_require__(166).check(ret, __webpack_require__(166).void);}});
+	
+	
+	
+	module.exports = BaseStore;
+
+
+/***/ },
+
+/***/ 169:
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -709,7 +707,7 @@ webpackJsonp([0],{
 	 */
 	
 	var fbemitter = {
-	  EventEmitter: __webpack_require__(172)
+	  EventEmitter: __webpack_require__(170)
 	};
 	
 	module.exports = fbemitter;
@@ -717,7 +715,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 172:
+/***/ 170:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -736,8 +734,8 @@ webpackJsonp([0],{
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var EmitterSubscription = __webpack_require__(173);
-	var EventSubscriptionVendor = __webpack_require__(175);
+	var EmitterSubscription = __webpack_require__(171);
+	var EventSubscriptionVendor = __webpack_require__(173);
 	
 	var emptyFunction = __webpack_require__(16);
 	var invariant = __webpack_require__(14);
@@ -915,7 +913,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 173:
+/***/ 171:
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -936,7 +934,7 @@ webpackJsonp([0],{
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var EventSubscription = __webpack_require__(174);
+	var EventSubscription = __webpack_require__(172);
 	
 	/**
 	 * EmitterSubscription represents a subscription with listener and context data.
@@ -969,7 +967,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 174:
+/***/ 172:
 /***/ function(module, exports) {
 
 	/**
@@ -1021,7 +1019,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 175:
+/***/ 173:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -1131,67 +1129,71 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 176:
+/***/ 174:
 /***/ function(module, exports, __webpack_require__) {
 
-	/*
-	 * Application Actions
-	 * @flow
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
 	 */
 	
-	var AppConstants = __webpack_require__(160);
-	var AppDispatcher = __webpack_require__(162);
+	'use strict';
 	
-	var $__0=  AppConstants,ActionTypes=$__0.ActionTypes;
+	/**
+	 * Use invariant() to assert state which your program assumes to be true.
+	 *
+	 * Provide sprintf-style format (only %s is supported) and arguments
+	 * to provide information about what broke and what you were
+	 * expecting.
+	 *
+	 * The invariant message will be stripped in production, but the invariant
+	 * will remain to ensure logic does not differ in production.
+	 */
 	
-	function AppActions(){"use strict";}
+	var invariant = function(condition, format, a, b, c, d, e, f) {
+	  if (process.env.NODE_ENV !== 'production') {
+	    if (format === undefined) {
+	      throw new Error('invariant requires an error message argument');
+	    }
+	  }
 	
-	    Object.defineProperty(AppActions.prototype,"dispatch",{writable:true,configurable:true,value:function(type        , data         ) {"use strict";__webpack_require__(168).check(arguments, __webpack_require__(168).arguments([__webpack_require__(168).string, __webpack_require__(168).optional(__webpack_require__(168).object)]));
-	        AppDispatcher.dispatch(Object.assign({ type:type}, data ));
-	    }});
+	  if (!condition) {
+	    var error;
+	    if (format === undefined) {
+	      error = new Error(
+	        'Minified exception occurred; use the non-minified dev environment ' +
+	        'for the full error message and additional helpful warnings.'
+	      );
+	    } else {
+	      var args = [a, b, c, d, e, f];
+	      var argIndex = 0;
+	      error = new Error(
+	        format.replace(/%s/g, function() { return args[argIndex++]; })
+	      );
+	      error.name = 'Invariant Violation';
+	    }
 	
-	    Object.defineProperty(AppActions.prototype,"initLoad",{writable:true,configurable:true,value:function(data         ) {"use strict";__webpack_require__(168).check(arguments, __webpack_require__(168).arguments([__webpack_require__(168).optional(__webpack_require__(168).object)]));
-	        this.dispatch(ActionTypes.INIT_LOAD, data);
-	    }});
+	    error.framesToPop = 1; // we don't care about invariant's own frame
+	    throw error;
+	  }
+	};
 	
-	;
+	module.exports = invariant;
 	
-	module.exports = new AppActions();
-
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
 
-/***/ 177:
+/***/ 175:
 /***/ function(module, exports, __webpack_require__) {
 
-	/*
-	 * Data Store
-	 * @flow
-	 */
+	'use strict';
 	
-	var AppConstants = __webpack_require__(160);
-	var BaseStore = __webpack_require__(166);
-	
-	var $__0=  AppConstants,ActionTypes=$__0.ActionTypes;
-	
-	for(var BaseStore____Key in BaseStore){if(BaseStore.hasOwnProperty(BaseStore____Key)){ExampleStore[BaseStore____Key]=BaseStore[BaseStore____Key];}}var ____SuperProtoOfBaseStore=BaseStore===null?null:BaseStore.prototype;ExampleStore.prototype=Object.create(____SuperProtoOfBaseStore);ExampleStore.prototype.constructor=ExampleStore;ExampleStore.__superConstructor__=BaseStore;
-	
-	    function ExampleStore() {"use strict";
-	        BaseStore.call(this);
-	        this.setupActions();
-	    }
-	
-	    Object.defineProperty(ExampleStore.prototype,"setupActions",{writable:true,configurable:true,value:function() {"use strict";
-	        this.addAction(ActionTypes.INIT_LOAD, this.initLoad);
-	    }});
-	
-	    Object.defineProperty(ExampleStore.prototype,"initLoad",{writable:true,configurable:true,value:function(action        ) {"use strict";__webpack_require__(168).check(arguments, __webpack_require__(168).arguments([__webpack_require__(168).object]));
-	        this.emitChange();
-	    }});
-	
-	
-	
-	module.exports = new ExampleStore();
+	module.exports = __webpack_require__(4);
 
 
 /***/ }

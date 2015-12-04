@@ -13,26 +13,28 @@ var ReactDOM = require('react-dom');
 
 var {ActionTypes} = AppConstants;
 
-/* Inital entry point and bootstrapper for application */
 class Initializer {
 
-    initialize(): void {
+    constructor() {
+        this.application = <App />;
+        this.stores = [
+            ExampleStore,
+        ];
+    }
+
+    init(appRoot): void {
         // Perform store initialization
-        AppDispatcher.register(action => {
+        var dispatchToken = AppDispatcher.register(action => {
             if (action.type === ActionTypes.INIT_LOAD) {
-                var stores = [
-                    ExampleStore,
-                ];
                 AppDispatcher.waitFor(
-                    stores.map(store => store.getDispatchToken())
+                    this.stores.map(store => store.getDispatchToken())
                 );
 
                 // Render the application
-                ReactDOM.render(
-                    <App />,
-                    document.getElementById("app-root")
-                );
+                ReactDOM.render(this.application, appRoot);
+                AppDispatcher.unregister(dispatchToken);
             }
+            return;
         });
 
         // send the initializing action
@@ -41,7 +43,8 @@ class Initializer {
 
 }
 
+// Let's initialize the application
 var initializer = new Initializer();
-initializer.initialize();
+initializer.init(document.getElementById("app-root"));
 
 module.exports = Initializer;
