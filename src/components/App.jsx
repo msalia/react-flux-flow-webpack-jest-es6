@@ -1,4 +1,7 @@
-/* @flow */
+/*
+ * Application Root Component
+ * @flow
+ */
 
 var React = require('react');
 
