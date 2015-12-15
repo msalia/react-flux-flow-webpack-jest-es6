@@ -1,3 +1,9 @@
 .DS_Store
 node_modules/
 dist/bundles/
+dist/bundles/app.bundle.js
+dist/bundles/app.bundle.js.map
+dist/bundles/vendor.bundle.js
+dist/bundles/vendor.bundle.js.map
+dist/bundles/common.js
+dist/bundles/common.js.map

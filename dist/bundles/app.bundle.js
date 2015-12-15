@@ -4,7 +4,7 @@ webpackJsonp([0],{
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
-	 * Applicaiton Initializer
+	 * Application Initializer
 	 * @flow
 	 */
 	
@@ -48,6 +48,7 @@ webpackJsonp([0],{
 	
 	
 	
+	// Let's initialize the application
 	var initializer = new Initializer();
 	initializer.init(document.getElementById("app-root"));
 	
@@ -59,7 +60,10 @@ webpackJsonp([0],{
 /***/ 1:
 /***/ function(module, exports, __webpack_require__) {
 
-	/* @flow */
+	/*
+	 * Application Root Component
+	 * @flow
+	 */
 	
 	var React = __webpack_require__(2);
 	
@@ -275,10 +279,7 @@ webpackJsonp([0],{
 	var AppDispatcher = new Dispatcher();
 	
 	AppDispatcher.handleViewAction = function(action)  {
-	    this.dispatch({
-	        source: 'VIEW_ACTION',
-	        action: action,
-	    });
+	    this.dispatch({ source: 'VIEW_ACTION', action: action });
 	}.bind(this);
 	
 	module.exports = AppDispatcher;
@@ -616,6 +617,7 @@ webpackJsonp([0],{
 	
 	    function ExampleStore() {"use strict";
 	        BaseStore.call(this);
+	        this.$ExampleStore_data = {};
 	        this.setupActions();
 	    }
 	
@@ -624,7 +626,12 @@ webpackJsonp([0],{
 	    }});
 	
 	    Object.defineProperty(ExampleStore.prototype,"initLoad",{writable:true,configurable:true,value:function(action        ) {"use strict";__webpack_require__(166).check(arguments, __webpack_require__(166).arguments([__webpack_require__(166).object]));
+	        this.$ExampleStore_data = action.data || {};
 	        this.emitChange();
+	    }});
+	
+	    Object.defineProperty(ExampleStore.prototype,"getData",{writable:true,configurable:true,value:function() {"use strict";
+	        return this.$ExampleStore_data;
 	    }});
 	
 	
