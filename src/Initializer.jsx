@@ -25,7 +25,7 @@ class Initializer {
     init(appRoot): void {
         // Perform store initialization
         var dispatchToken = AppDispatcher.register(action => {
-            if (action.type === ActionTypes.INIT_LOAD) {
+            if (action.actionType === ActionTypes.INIT_LOAD) {
                 AppDispatcher.waitFor(
                     this.stores.map(store => store.getDispatchToken())
                 );

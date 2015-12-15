@@ -10,8 +10,8 @@ var {ActionTypes} = AppConstants;
 
 class AppActions {
 
-    dispatch(type: string, data?: Object) {
-        AppDispatcher.dispatch({ type, ...data });
+    dispatch(actionType: string, data?: Object) {
+        AppDispatcher.dispatch({ actionType, ...data });
     }
 
     initLoad(data?: Object) {
