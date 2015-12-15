@@ -2,21 +2,20 @@
 The complete React + Flux stack setup. Simply clone the repository and you are on your way to developing high quality front-end applications.
 
 # Setup
-Clone repository. Then run:
-> `myClonedRepository%> npm install`
+> `npm install react-flux-flow-webpack-jest-es6`
 
 ### Running Webpack
-> `myClonedRepository%> webpack`
+> `webpack`
 
 Checkout https://webpack.github.io/ for documentation.
 
 ### Running Flow
-> `myClonedRepository%> flow`
+> `flow`
 
 Checkout http://flowtype.org/docs/quick-reference.html for documentation.
 
 ### Running Jest
-> `myClonedRepository%> npm test`
+> `npm test`
 
 ### React
 Checkout https://facebook.github.io/react/ for documentation.
