@@ -13,10 +13,7 @@ var {ActionTypes} = AppConstants;
 
 // Helper functions
 function sendAction(actionType, data) {
-    callback && callback({
-        source: 'VIEW_ACTION',
-        action: { actionType, ...data },
-    });
+    callback && callback({ actionType, ...data });
 }
 
 describe('Example Store Test', () => {
