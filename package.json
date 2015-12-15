@@ -1,5 +1,7 @@
 {
   "name": "React-Flux-Flow-Webpack-ES6",
+  "email": "salia.mukund@gmail.com",
+  "url": "http://www.student.cs.uwaterloo.ca/~msalia",
   "version": "0.0.2",
   "description": "React-Flux Starter",
   "main": "webpack.config.js",
