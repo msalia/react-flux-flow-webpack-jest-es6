@@ -3,6 +3,7 @@
 .*/node_modules/.*
 package.json
 webpack.config.js
+jest-preprocessor.js
 
 [libs]
 ./node_modules

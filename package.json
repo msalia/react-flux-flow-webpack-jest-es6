@@ -1,26 +1,15 @@
 {
   "name": "React-Flux-Flow-Webpack-ES6",
-  "version": "0.0.1",
-  "description": "React Bootstrap",
+  "version": "0.0.2",
+  "description": "React-Flux Starter",
   "main": "webpack.config.js",
   "scripts": {
     "test": "jest"
   },
-  "keywords": [
-    "react",
-    "flux",
-    "flow",
-    "webpack",
-    "jest",
-    "es6"
-  ],
+  "keywords": ["react", "flux", "flow", "webpack", "jest", "es6"],
   "jest": {
-    "testFileExtensions": [
-      "js"
-    ],
-    "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules"
-    ],
+    "testFileExtensions": ["js"],
+    "unmockedModulePathPatterns": ["<rootDir>/node_modules"],
     "scriptPreprocessor": "jest-preprocessor.js"
   },
   "author": "Mukund Salia",
@@ -38,7 +27,6 @@
   },
   "devDependencies": {
     "babel-jest": "5.3.0",
-    "babel-preset-es2015": "^6.3.13",
     "flowcheck": "^0.2.7",
     "flowcheck-loader": "^1.0.0",
     "jest-cli": "^0.8.1",
