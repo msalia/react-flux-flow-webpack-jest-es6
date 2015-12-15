@@ -1,7 +1,5 @@
 {
   "name": "React-Flux-Flow-Webpack-ES6",
-  "email": "salia.mukund@gmail.com",
-  "url": "http://www.student.cs.uwaterloo.ca/~msalia",
   "version": "0.0.2",
   "description": "React-Flux Starter",
   "main": "webpack.config.js",
@@ -14,7 +12,11 @@
     "unmockedModulePathPatterns": ["<rootDir>/node_modules"],
     "scriptPreprocessor": "jest-preprocessor.js"
   },
-  "author": "Mukund Salia",
+  "author": {
+    "name": "Mukund Salia",
+    "email": "salia.mukund@gmail.com",
+    "url": "http://www.student.cs.uwaterloo.ca/~msalia"
+  },
   "dependencies": {
     "classnames": "^2.2.1",
     "flux": "^2.1.1",
