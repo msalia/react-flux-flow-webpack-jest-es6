@@ -1,5 +1,5 @@
 {
-  "name": "React-Flux-Flow-Webpack-ES6",
+  "name": "react-flux-flow-webpack-jest-ES6",
   "version": "0.0.2",
   "description": "React-Flux Starter",
   "main": "webpack.config.js",
