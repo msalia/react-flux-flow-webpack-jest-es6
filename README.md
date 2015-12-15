@@ -17,6 +17,8 @@ Checkout http://flowtype.org/docs/quick-reference.html for documentation.
 ### Running Jest
 > `npm test`
 
+Example jest test can be found at `src/stores/__tests__`
+
 ### React
 Checkout https://facebook.github.io/react/ for documentation.
 
@@ -25,8 +27,6 @@ Checkout https://facebook.github.io/flux/docs/overview.html for documentation.
 
 ### ES6 Syntax
 Checkout https://babeljs.io/docs/learn-es2015/#ecmascript-6-features for documentation.
-
-Example jest test can be found at `src/stores/__tests__`
 
 # License
 This content is released under the MIT License. Copyright (c) 2015 Mukund Salia
