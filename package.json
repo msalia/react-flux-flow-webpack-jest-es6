@@ -1,8 +1,12 @@
 {
   "name": "react-flux-flow-webpack-jest-es6",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "React-Flux Starter",
   "main": "webpack.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/msalia/react-flux-flow-webpack-jest-es6.git"
+  }
   "scripts": {
     "test": "jest"
   },
