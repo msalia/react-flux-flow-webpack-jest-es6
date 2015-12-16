@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/msalia/react-flux-flow-webpack-jest-es6.git"
+    "url": "https://github.com/msalia/react-flux-flow-webpack-jest-es6"
   },
   "scripts": {
     "test": "jest"
