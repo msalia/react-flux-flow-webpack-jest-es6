@@ -39,5 +39,6 @@
     "flowcheck-loader": "^1.0.0",
     "jest-cli": "^0.8.1",
     "jest-webpack-alias": "^2.0.0"
-  }
+  },
+  "license": "MIT"
 }
