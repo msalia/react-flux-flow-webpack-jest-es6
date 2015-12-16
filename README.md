@@ -2,7 +2,7 @@
 The complete React + Flux stack setup. Simply clone the repository and you are on your way to developing high quality front-end applications.
 
 # Setup
-Simply download & expand the package file.
+Simply download & expand the package file and run `npm install`.
 
 [Source Code: zip](https://github.com/msalia/react-flux-flow-webpack-jest-es6/archive/v1.0.0.zip "Source Code: zip")
 
