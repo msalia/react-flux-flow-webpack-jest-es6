@@ -1,7 +1,7 @@
 {
   "name": "react-flux-flow-webpack-jest-es6",
-  "version": "0.0.5",
-  "description": "React-Flux Starter",
+  "version": "1.0.0",
+  "description": "React-Flux Starter Kit",
   "main": "webpack.config.js",
   "repository": {
     "type": "git",
@@ -10,7 +10,7 @@
   "scripts": {
     "test": "jest"
   },
-  "keywords": ["react", "flux", "flow", "webpack", "jest", "es6"],
+  "keywords": ["react", "flux", "flow", "webpack", "jest", "es6", "starter kit"],
   "jest": {
     "testFileExtensions": ["js"],
     "unmockedModulePathPatterns": ["<rootDir>/node_modules"],
