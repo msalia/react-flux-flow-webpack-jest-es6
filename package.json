@@ -1,6 +1,6 @@
 {
   "name": "react-flux-flow-webpack-jest-es6",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React-Flux Starter Kit",
   "main": "webpack.config.js",
   "repository": {
