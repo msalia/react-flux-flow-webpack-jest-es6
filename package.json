@@ -10,10 +10,22 @@
   "scripts": {
     "test": "jest"
   },
-  "keywords": ["react", "flux", "flow", "webpack", "jest", "es6", "starter kit"],
+  "keywords": [
+    "react",
+    "flux",
+    "flow",
+    "webpack",
+    "jest",
+    "es6",
+    "starter kit"
+  ],
   "jest": {
-    "testFileExtensions": ["js"],
-    "unmockedModulePathPatterns": ["<rootDir>/node_modules"],
+    "testFileExtensions": [
+      "js"
+    ],
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules"
+    ],
     "scriptPreprocessor": "jest-preprocessor.js"
   },
   "author": {
@@ -23,6 +35,8 @@
   },
   "dependencies": {
     "classnames": "^2.2.1",
+    "fbemitter": "^2.0.0",
+    "fbjs": "^0.5.1",
     "flux": "^2.1.1",
     "invariant": "^2.2.0",
     "jsx-loader": "^0.13.2",
